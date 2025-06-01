@@ -1,61 +1,130 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel CRUD Application
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A basic CRUD (Create, Read, Update, Delete) application built with Laravel 12, featuring Category and Post management with relationships.
 
-## About Laravel
+## Features
+- **Category Management**: Full CRUD operations for categories
+- **Post Management**: Full CRUD operations for blog posts
+- **Relationships**: Posts belong to categories (one-to-many relationship)
+- **Validation**: Form validation for all inputs
+- **UI**: Responsive Bootstrap interface
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Requirements
+- PHP 8.1+
+- Composer
+- MySQL 8.0+
+- Node.js 18+ (for frontend dependencies)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Installation & Setup
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 1. Clone the repository
+```bash
+git clone https://github.com/TannyCoder/CRUD-App-Laravel-12
+cd laravel-crud-app
+```
 
-## Learning Laravel
+### 2. Install dependencies
+```bash
+composer install
+npm install
+```
+### 3. Configure environment
+# 1. Copy .env.example to .env:
+```bash
+cp .env.example .env
+```
+# 2. Generate app key:
+```bash
+php artisan key:generate
+```
+# 3. Update database credentials in .env:
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=cms_new
+DB_USERNAME=root
+DB_PASSWORD=
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 4. Run migrations and seeders
+```bash
+php artisan migrate --seed
+```
+### 5. Build frontend assets
+```bash
+npm run build
+```
+### 6. Start development server
+```bash
+php artisan serve
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Usage Guide
+Category Management
+List Categories: /categories
+View all categories
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Create Category: /categories/create
+Add new categories
 
-## Laravel Sponsors
+Edit Category: /categories/{id}/edit
+Modify existing categories
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Delete Category: Click delete button
+Remove categories (with confirmation)
 
-### Premium Partners
+Post Management
+List Posts: /posts
+View all posts with pagination
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Create Post: /posts/create
+Add new blog posts (select category from dropdown)
 
-## Contributing
+View Post: /posts/{id}
+See post details
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Edit Post: /posts/{id}/edit
+Modify existing posts
 
-## Code of Conduct
+Delete Post: Click delete button
+Remove posts (with confirmation)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Relationships
+Each post belongs to a category
 
-## Security Vulnerabilities
+Categories show post counts
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Filter posts by category
 
-## License
+# Project structure
+app/
+├── Models/
+│   ├── Category.php
+│   └── Post.php
+├── Http/
+│   ├── Controllers/
+│   │   ├── CategoryController.php
+│   │   └── PostController.php
+database/
+├── migrations/
+│   ├── create_categories_table.php
+│   └── create_posts_table.php
+├── seeders/
+│   └── DatabaseSeeder.php
+resources/
+├── views/
+│   ├── categories/
+│   └── posts/
+routes/
+└── web.php
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Seeded Test Data
+The database seeder creates:
+1 admin user:
+Email: tankyaaah@gmail.com
+Password: tankyaaah@gmail.com
+
+# Troubleshooting
+Migration errors: Run php artisan migrate:fresh --seed
+Class not found: Run composer dump-autoload
+Assets not loading: Run npm run build
+Permission issues: Run chmod -R 775 storage bootstrap/cache
